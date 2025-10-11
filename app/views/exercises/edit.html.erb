@@ -1,0 +1,72 @@
+<!-- filepath: /Users/endouwataru/care_app2/app/views/exercises/edit.html.erb -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2>エクササイズ編集</h2>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @exercise, local: true do |form| %>
+            <% if @exercise.errors.any? %>
+              <div class="alert alert-danger">
+                <ul class="mb-0">
+                  <% @exercise.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <!-- 基本情報 -->
+            <div class="mb-3">
+              <%= form.label :title, "タイトル", class: "form-label" %>
+              <%= form.text_field :title, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :description, "説明", class: "form-label" %>
+              <%= form.text_area :description, class: "form-control", rows: 3 %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :duration, "所要時間（分）", class: "form-label" %>
+              <%= form.number_field :duration, class: "form-control", min: 1 %>
+            </div>
+
+            <!-- 動画設定 -->
+            <h5 class="mt-4 mb-3">動画設定</h5>
+            
+            <div class="mb-3">
+              <%= form.label :youtube_url, "YouTube URL（オプション）", class: "form-label" %>
+              <%= form.url_field :youtube_url, class: "form-control", placeholder: "https://www.youtube.com/watch?v=..." %>
+              <div class="form-text">YouTube動画のURLを入力してください</div>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :video_file, "動画ファイル（オプション）", class: "form-label" %>
+              <%= form.file_field :video_file, class: "form-control", accept: "video/*" %>
+              <div class="form-text">MP4, MOV, AVIなどの動画ファイルをアップロード</div>
+            </div>
+
+            <!-- 詳細情報 -->
+            <div class="mb-3">
+              <%= form.label :instructions, "実施方法", class: "form-label" %>
+              <%= form.text_area :instructions, class: "form-control", rows: 4, placeholder: "エクササイズの実施方法を詳しく説明してください" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :steps, "詳細手順", class: "form-label" %>
+              <%= form.text_area :steps, class: "form-control", rows: 6, placeholder: "1. 最初の手順&#10;2. 次の手順&#10;3. ..." %>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= form.submit "更新", class: "btn btn-primary" %>
+              <%= link_to "キャンセル", exercise_path(@exercise), class: "btn btn-secondary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

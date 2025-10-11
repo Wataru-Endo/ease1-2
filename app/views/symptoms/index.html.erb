@@ -1,0 +1,111 @@
+<!-- filepath: /Users/endouwataru/care_app2/app/views/symptoms/index.html.erb -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <div class="card">
+        <div class="card-header text-center">
+          <h2><i class="fas fa-search me-2"></i>お困りの症状を選択してください</h2>
+          <p class="mb-0 text-muted">該当する症状をクリックして、適切なセルフケアを見つけましょう</p>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <% 
+            # 症状の順序を定義
+            symptom_order = ["腰痛", "肩こり", "首の痛み", "膝の痛み", "頭痛", "眼精疲労"]
+            colors = ["danger", "warning", "info", "success", "secondary", "primary"]
+            icons = ["user-injured", "hand-paper", "head-side-cough", "walking", "brain", "eye"]
+            descriptions = [
+              "腰の痛み、だるさ、重い感じ",
+              "肩の張り、こり、重い感じ", 
+              "首のこり、寝違え、ストレートネック",
+              "膝の痛み、違和感、歩行時の不快感",
+              "緊張型頭痛、目の疲れからくる頭痛",
+              "目の疲れ、ドライアイ、視界のぼやけ"
+            ]
+            
+            # 症状に対応する画像ファイル名
+            image_files = {
+              "腰痛" => "腰.png",
+              "肩こり" => "肩.png",
+              "首の痛み" => "腰.png",
+              "膝の痛み" => "膝.png",
+              "頭痛" => "頭痛.png",
+              "眼精疲労" => "腰.png"
+            }
+            
+            symptom_order.each_with_index do |symptom_name, index|
+              symptom = Symptom.find_by(name: symptom_name)
+              next unless symptom
+              image_file = image_files[symptom_name]
+            %>
+              <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card h-100 symptom-card">
+                  <!-- 画像エリア -->
+                  <div class="card-img-container">
+                    <% if image_file %>
+                      <%= image_tag image_file, class: "symptom-image", alt: symptom.name %>
+                    <% else %>
+                      <!-- 画像がない場合はアイコンを表示 -->
+                      <div class="symptom-icon-fallback d-flex align-items-center justify-content-center">
+                        <i class="fas fa-<%= icons[index] %> fa-4x text-<%= colors[index] %>"></i>
+                      </div>
+                    <% end %>
+                  </div>
+                  
+                  <div class="card-body text-center">
+                    <h5 class="card-title"><%= symptom.name %></h5>
+                    <p class="card-text text-muted"><%= descriptions[index] %></p>
+                    <%= link_to "セルフケアを見る", symptom_path(symptom), class: "btn btn-outline-#{colors[index]}" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <!-- 戻るボタン -->
+      <div class="text-center mt-4">
+        <%= link_to user_path(current_user), class: "btn btn-secondary" do %>
+          <i class="fas fa-arrow-left me-2"></i>プロフィールに戻る
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.symptom-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.symptom-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.card-img-container {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: #f8f9fa;
+}
+
+.symptom-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.symptom-icon-fallback {
+  height: 200px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+</style>

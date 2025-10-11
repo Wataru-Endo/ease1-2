@@ -1,0 +1,99 @@
+<!-- filepath: /Users/endouwataru/care_app2/app/views/exercises/show.html.erb -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div>
+            <h2><%= @exercise.title %></h2>
+            <p class="text-muted mb-0">所要時間: <%= @exercise.duration %>分</p>
+          </div>
+          <%= link_to "編集", edit_exercise_path(@exercise), class: "btn btn-outline-primary" %>
+        </div>
+        <div class="card-body">
+          <!-- 動画エリア -->
+          <div class="video-section mb-4">
+            <% if @exercise.youtube_url.present? %>
+              <!-- YouTube動画 -->
+              <div class="video-container">
+                <iframe src="<%= @exercise.youtube_embed_url %>" 
+                        frameborder="0" 
+                        allowfullscreen>
+                </iframe>
+              </div>
+            <% elsif @exercise.video_file.attached? %>
+              <!-- 自作動画ファイル -->
+              <div class="video-container">
+                <video controls>
+                  <source src="<%= url_for(@exercise.video_file) %>" type="video/mp4">
+                  お使いのブラウザは動画をサポートしていません。
+                </video>
+              </div>
+            <% else %>
+              <!-- 動画なしの場合 -->
+              <div class="bg-light d-flex align-items-center justify-content-center video-placeholder">
+                <div class="text-center">
+                  <i class="fas fa-video fa-3x text-secondary mb-3"></i>
+                  <p class="text-muted">動画はありません</p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <!-- エクササイズ説明 -->
+          <div class="exercise-description mb-4">
+            <h5><i class="fas fa-info-circle me-2"></i>エクササイズの説明</h5>
+            <p><%= simple_format(@exercise.description) %></p>
+          </div>
+
+          <!-- 実施手順 -->
+          <% if @exercise.instructions.present? %>
+            <div class="exercise-instructions mb-4">
+              <h5><i class="fas fa-list-ol me-2"></i>実施方法</h5>
+              <p><%= simple_format(@exercise.instructions) %></p>
+            </div>
+          <% end %>
+
+          <!-- 詳細手順 -->
+          <% if @exercise.steps.present? %>
+            <div class="exercise-steps mb-4">
+              <h5><i class="fas fa-clipboard-list me-2"></i>詳細手順</h5>
+              <div><%= simple_format(@exercise.steps) %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- ナビゲーション -->
+      <div class="text-center mt-4">
+        <%= link_to "症状選択に戻る", symptoms_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 アスペクト比 */
+  height: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-container iframe,
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-placeholder {
+  height: 300px;
+  border-radius: 8px;
+  border: 2px dashed #dee2e6;
+}
+</style>

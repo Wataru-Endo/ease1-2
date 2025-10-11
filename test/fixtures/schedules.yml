@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: MyString
+  : one
+  exercise: one
+  scheduled_at: 2025-09-30 20:25:01
+  completed: false
+
+two:
+  user: MyString
+  : two
+  exercise: two
+  scheduled_at: 2025-09-30 20:25:01
+  completed: false

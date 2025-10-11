@@ -1,0 +1,55 @@
+<!-- filepath: /Users/endouwataru/care_app2/app/views/users/new.html.erb -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          <h2>新規登録</h2>
+          <p class="mb-0">セルフケアアプリに登録</p>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @user, local: true do |form| %>
+            <% if @user.errors.any? %>
+              <div class="alert alert-danger">
+                <ul class="mb-0">
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="mb-3">
+              <%= form.label :name, "お名前", class: "form-label" %>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+            
+            <div class="mb-3">
+              <%= form.label :email, "メールアドレス", class: "form-label" %>
+              <%= form.email_field :email, class: "form-control", placeholder: "example@email.com" %>
+            </div>
+            
+            <div class="mb-3">
+              <%= form.label :password, "パスワード（6文字以上）", class: "form-label" %>
+              <%= form.password_field :password, class: "form-control" %>
+            </div>
+            
+            <div class="mb-3">
+              <%= form.label :password_confirmation, "パスワード確認", class: "form-label" %>
+              <%= form.password_field :password_confirmation, class: "form-control" %>
+            </div>
+            
+            <div class="d-grid">
+              <%= form.submit "登録", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+          
+          <div class="text-center mt-3">
+            <p>既にアカウントをお持ちの方は</p>
+            <%= link_to "ログイン", login_path, class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
