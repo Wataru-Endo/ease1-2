@@ -14,4 +14,19 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 6 }, allow_nil: true
+  
+  # お気に入りチェック用メソッド
+  def favorited?(exercise)
+    favorites.exists?(exercise: exercise)
+  end
+  
+  # お気に入り追加
+  def add_favorite(exercise)
+    favorites.find_or_create_by(exercise: exercise)
+  end
+  
+  # お気に入り削除
+  def remove_favorite(exercise)
+    favorites.find_by(exercise: exercise)&.destroy
+  end
 end

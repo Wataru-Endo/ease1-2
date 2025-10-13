@@ -1,0 +1,98 @@
+<!-- filepath: /Users/endouwataru/care_app2/app/views/favorites/index.html.erb -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2><i class="fas fa-heart text-warning me-2"></i>お気に入りのエクササイズ</h2>
+          <!-- @favorite_exercises を @favorites に変更 -->
+          <span class="badge bg-warning text-dark"><%= @favorites.count %>件</span>
+        </div>
+        
+        <!-- @favorite_exercises を @favorites に変更 -->
+        <% if @favorites.any? %>
+          <div class="card-body">
+            <div class="row g-4">
+              <!-- @favorite_exercises を @favorites に変更し、favorite.exercise でアクセス -->
+              <% @favorites.each do |favorite| %>
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 exercise-card">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge bg-<%= case favorite.exercise.symptom.name
+                          when '腰痛' then 'danger'
+                          when '肩こり' then 'warning'
+                          when '首の痛み' then 'info'
+                          when '膝の痛み' then 'success'
+                          when '頭痛' then 'secondary'
+                          when '眼精疲労' then 'primary'
+                          else 'light'
+                        end %>">
+                          <%= favorite.exercise.symptom.name %>
+                        </span>
+                        <%= favorite_button(favorite.exercise) %>
+                      </div>
+                      
+                      <h5 class="card-title"><%= favorite.exercise.title %></h5>
+                      <p class="card-text text-muted small">
+                        <%= truncate(favorite.exercise.description, length: 80) %>
+                      </p>
+                      <p class="card-text">
+                        <small class="text-muted">
+                          <i class="fas fa-clock me-1"></i>所要時間: <%= favorite.exercise.duration %>分
+                        </small>
+                      </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                      <%= link_to "詳細を見る", exercise_path(favorite.exercise), class: "btn btn-primary btn-sm w-100" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <div class="card-body text-center py-5">
+            <div class="empty-state">
+              <i class="fas fa-heart-broken fa-4x text-muted mb-3"></i>
+              <h4 class="text-muted">お気に入りのエクササイズがありません</h4>
+              <p class="text-muted mb-4">
+                気になるエクササイズを見つけて、お気に入りに追加してみましょう！
+              </p>
+              <%= link_to "症状を選択してエクササイズを探す", symptoms_path, class: "btn btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- ナビゲーション -->
+      <div class="text-center mt-4">
+        <%= link_to "症状選択", symptoms_path, class: "btn btn-outline-primary me-2" %>
+        <%= link_to "プロフィール", user_path(current_user), class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.exercise-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.exercise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.favorite-btn {
+  transition: all 0.3s ease;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.05);
+}
+
+.empty-state {
+  padding: 2rem;
+}
+</style>

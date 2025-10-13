@@ -32,4 +32,9 @@ class Exercise < ApplicationRecord
     
     "https://www.youtube.com/embed/#{video_id}"
   end
+  
+  # お気に入り関連を追加
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
+
 end

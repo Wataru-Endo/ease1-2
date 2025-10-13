@@ -2,21 +2,20 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <div class="card">
-        <div class="card-header text-center">
-          <h2>セルフケアアプリ</h2>
-          <p class="mb-0">ログイン</p>
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+          <h2><i class="fas fa-sign-in-alt me-2"></i>ログイン</h2>
         </div>
         <div class="card-body">
-          <%= form_with url: login_path, method: :post, local: true do |form| %>
+          <%= form_with url: login_path, local: true do |form| %>
             <div class="mb-3">
               <%= form.label :email, "メールアドレス", class: "form-label" %>
-              <%= form.email_field :email, class: "form-control", placeholder: "example@email.com" %>
+              <%= form.email_field :email, class: "form-control", placeholder: "例: user@example.com" %>
             </div>
             
             <div class="mb-3">
               <%= form.label :password, "パスワード", class: "form-label" %>
-              <%= form.password_field :password, class: "form-control" %>
+              <%= form.password_field :password, class: "form-control", placeholder: "パスワードを入力" %>
             </div>
             
             <div class="d-grid">
@@ -24,10 +23,18 @@
             </div>
           <% end %>
           
+          <!-- 新規登録リンク -->
           <div class="text-center mt-3">
-            <p>アカウントをお持ちでない方は</p>
-            <%= link_to "新規登録", new_user_path, class: "btn btn-outline-secondary" %>
+            <p class="text-muted">アカウントをお持ちでない方は</p>
+            <%= link_to "新規登録はこちら", new_user_path, class: "btn btn-outline-secondary" %>
           </div>
+        </div>
+        
+        <!-- トップページに戻るボタン -->
+        <div class="card-footer text-center bg-light">
+          <%= link_to root_path, class: "btn btn-link text-muted" do %>
+            <i class="fas fa-arrow-left me-2"></i>トップページに戻る
+          <% end %>
         </div>
       </div>
     </div>

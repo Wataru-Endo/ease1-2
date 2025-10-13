@@ -8,6 +8,8 @@
             <h2><%= @exercise.title %></h2>
             <p class="text-muted mb-0">所要時間: <%= @exercise.duration %>分</p>
           </div>
+          <!-- お気に入りボタンを追加 -->
+            <%= favorite_button(@exercise) %>
           <%= link_to "編集", edit_exercise_path(@exercise), class: "btn btn-outline-primary" %>
         </div>
         <div class="card-body">

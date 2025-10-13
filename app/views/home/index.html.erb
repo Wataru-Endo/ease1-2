@@ -1,0 +1,263 @@
+<!-- filepath: /Users/endouwataru/care_app2/app/views/home/index.html.erb -->
+<div class="hero-section">
+  <div class="container">
+    <div class="row align-items-center min-vh-100">
+      <div class="col-lg-6">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <span class="text-primary">セルフケア</span>で<br>
+            健康な毎日を
+          </h1>
+          <p class="hero-description">
+            症状に合わせたエクササイズで、自宅で簡単にセルフケア。<br>
+            専門的な動画ガイドと詳細な手順で、正しいケア方法を学べます。
+          </p>
+          <div class="hero-buttons">
+            <%= link_to "今すぐ始める", login_path, class: "btn btn-primary btn-lg me-3" %>
+            <%= link_to "アカウント作成", new_user_path, class: "btn btn-outline-primary btn-lg" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-image">
+          <div class="image-placeholder">
+            <i class="fas fa-heartbeat fa-8x text-primary opacity-50"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 機能紹介セクション -->
+<section class="features-section py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">アプリの特徴</h2>
+      <p class="section-subtitle text-muted">
+        あなたの症状に合わせた最適なセルフケアを提案します
+      </p>
+    </div>
+    
+    <div class="row g-4">
+      <!-- 症状別ケア -->
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-search-plus fa-3x text-danger"></i>
+          </div>
+          <h4>症状別ケア</h4>
+          <p class="text-muted">
+            腰痛、肩こり、首の痛みなど、具体的な症状に応じたエクササイズを提案。
+            あなたの悩みに直接アプローチします。
+          </p>
+        </div>
+      </div>
+      
+      <!-- 動画ガイド -->
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-play-circle fa-3x text-primary"></i>
+          </div>
+          <h4>動画ガイド</h4>
+          <p class="text-muted">
+            正しいフォームと手順を動画で確認。
+            初心者でも安心して取り組める詳細な説明付きです。
+          </p>
+        </div>
+      </div>
+      
+      <!-- 簡単操作 -->
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-mobile-alt fa-3x text-success"></i>
+          </div>
+          <h4>簡単操作</h4>
+          <p class="text-muted">
+            直感的なインターフェースで、誰でも簡単に使用可能。
+            ストレスフリーなセルフケア体験を提供します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 使い方セクション -->
+<section class="how-to-section py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">使い方</h2>
+      <p class="section-subtitle text-muted">
+        3つのステップで簡単にセルフケアを始められます
+      </p>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="step-card text-center">
+          <div class="step-number">1</div>
+          <h5>症状を選択</h5>
+          <p class="text-muted">
+            お困りの症状を選択してください。腰痛、肩こり、首の痛みなど、様々な症状に対応しています。
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="step-card text-center">
+          <div class="step-number">2</div>
+          <h5>エクササイズを確認</h5>
+          <p class="text-muted">
+            症状に適したエクササイズを動画と詳細な手順で確認。自分のペースで学習できます。
+          </p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="step-card text-center">
+          <div class="step-number">3</div>
+          <h5>実践・継続</h5>
+          <p class="text-muted">
+            正しいフォームで実践し、継続することで症状の改善を目指します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA セクション -->
+<section class="cta-section py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="mb-3">今すぐセルフケアを始めませんか？</h2>
+        <p class="mb-4 text-muted">
+          健康な体は、毎日の小さなケアから。<br>
+          あなたの症状に合わせたセルフケアで、快適な生活を手に入れましょう。
+        </p>
+        <div class="cta-buttons">
+          <%= link_to "無料で始める", new_user_path, class: "btn btn-primary btn-lg me-3" %>
+          <%= link_to "ログイン", login_path, class: "btn btn-outline-secondary btn-lg" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ヒーローセクション */
+.hero-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.hero-buttons .btn {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+}
+
+.image-placeholder {
+  height: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+/* セクション */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+}
+
+/* 機能カード */
+.feature-card {
+  padding: 2rem;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+}
+
+.feature-icon {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ステップカード */
+.step-card {
+  padding: 2rem 1rem;
+}
+
+.step-number {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 auto 1rem;
+}
+
+/* CTAセクション */
+.cta-section {
+  background: #f8f9fa;
+}
+
+.cta-buttons .btn {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-buttons .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .cta-buttons .btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+</style>
