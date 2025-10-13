@@ -2,7 +2,7 @@
   "name": "care_app2",
   "private": true,
   "engines": {
-    "node": "22.11.0"
+    "node": "24.3.0"
   },
   "scripts": {
     "build:css": "sass app/assets/stylesheets/application.bootstrap.scss:app/assets/builds/application.css --no-source-map"
