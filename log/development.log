@@ -10766,3 +10766,686 @@ Processing by ExercisesController#show as HTML
 Completed 200 OK in 127ms (Views: 16.4ms | ActiveRecord: 1.1ms (4 queries, 0 cached) | GC: 0.0ms)
 
 
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='CareApp2'*/[0m
+  [1m[35m (80.0ms)[0m  [1m[35mCREATE DATABASE "care_app2_development" ENCODING = 'unicode' /*application='CareApp2'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='CareApp2'*/[0m
+  [1m[35m (14.5ms)[0m  [1m[35mCREATE DATABASE "care_app2_test" ENCODING = 'unicode' /*application='CareApp2'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3619463488481394750) /*application='CareApp2'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (4.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CareApp2'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(3619463488481394750) /*application='CareApp2'*/[0m
+Started GET "/" for ::1 at 2025-10-13 21:52:14 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CareApp2'*/[0m
+  
+ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+)
+Caused by: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+)
+
+Information for: ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+):
+  
+
+Information for cause: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+):
+  
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'PG::Connection#exec'
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements#perform_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:556:in 'block (2 levels) in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1017:in 'block in ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activesupport (8.0.3) lib/active_support/concurrency/null_lock.rb:9:in 'ActiveSupport::Concurrency::NullLock#synchronize'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:986:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:555:in 'block in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activesupport (8.0.3) lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1137:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#log'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:554:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:591:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:547:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_exec_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:693:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:73:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:262:in 'ActiveRecord::ConnectionAdapters::QueryCache#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:102:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_rows'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:96:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_values'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:83:in 'block in ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in 'ActiveRecord::ConnectionAdapters::ConnectionPool#with_connection'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:82:in 'ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:88:in 'ActiveRecord::SchemaMigration#integer_versions'
+activerecord (8.0.3) lib/active_record/migration.rb:1484:in 'ActiveRecord::Migrator#load_migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1480:in 'ActiveRecord::Migrator#migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1475:in 'ActiveRecord::Migrator#pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:762:in 'block (2 levels) in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration/pending_migration_connection.rb:8:in 'ActiveRecord::PendingMigrationConnection.with_temporary_pool'
+activerecord (8.0.3) lib/active_record/migration.rb:761:in 'block in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'Array#each'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:739:in 'ActiveRecord::Migration.check_pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:659:in 'block (2 levels) in ActiveRecord::Migration::CheckPending#call'
+activesupport (8.0.3) lib/active_support/file_update_checker.rb:85:in 'ActiveSupport::FileUpdateChecker#execute'
+activerecord (8.0.3) lib/active_record/migration.rb:664:in 'block in ActiveRecord::Migration::CheckPending#call'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'Thread::Mutex#synchronize'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.3) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.3) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.3) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.1) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.1) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.1) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.3) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/" for ::1 at 2025-10-13 21:52:21 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CareApp2'*/[0m
+  
+ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+)
+Caused by: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+)
+
+Information for: ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+):
+  
+
+Information for cause: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+):
+  
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'PG::Connection#exec'
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements#perform_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:556:in 'block (2 levels) in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1017:in 'block in ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activesupport (8.0.3) lib/active_support/concurrency/null_lock.rb:9:in 'ActiveSupport::Concurrency::NullLock#synchronize'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:986:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:555:in 'block in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activesupport (8.0.3) lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1137:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#log'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:554:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:591:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:547:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_exec_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:693:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:73:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:262:in 'ActiveRecord::ConnectionAdapters::QueryCache#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:102:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_rows'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:96:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_values'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:83:in 'block in ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in 'ActiveRecord::ConnectionAdapters::ConnectionPool#with_connection'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:82:in 'ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:88:in 'ActiveRecord::SchemaMigration#integer_versions'
+activerecord (8.0.3) lib/active_record/migration.rb:1484:in 'ActiveRecord::Migrator#load_migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1480:in 'ActiveRecord::Migrator#migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1475:in 'ActiveRecord::Migrator#pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:762:in 'block (2 levels) in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration/pending_migration_connection.rb:8:in 'ActiveRecord::PendingMigrationConnection.with_temporary_pool'
+activerecord (8.0.3) lib/active_record/migration.rb:761:in 'block in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'Array#each'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:739:in 'ActiveRecord::Migration.check_pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:659:in 'block (2 levels) in ActiveRecord::Migration::CheckPending#call'
+activesupport (8.0.3) lib/active_support/file_update_checker.rb:85:in 'ActiveSupport::FileUpdateChecker#execute'
+activerecord (8.0.3) lib/active_record/migration.rb:664:in 'block in ActiveRecord::Migration::CheckPending#call'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'Thread::Mutex#synchronize'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.3) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.3) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.3) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.1) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.1) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.1) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.3) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2025-10-13 21:52:21 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CareApp2'*/[0m
+  
+ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+)
+Caused by: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+)
+
+Information for: ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+):
+  
+
+Information for cause: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+):
+  
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'PG::Connection#exec'
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements#perform_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:556:in 'block (2 levels) in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1017:in 'block in ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activesupport (8.0.3) lib/active_support/concurrency/null_lock.rb:9:in 'ActiveSupport::Concurrency::NullLock#synchronize'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:986:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:555:in 'block in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activesupport (8.0.3) lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1137:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#log'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:554:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:591:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:547:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_exec_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:693:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:73:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:262:in 'ActiveRecord::ConnectionAdapters::QueryCache#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:102:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_rows'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:96:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_values'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:83:in 'block in ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in 'ActiveRecord::ConnectionAdapters::ConnectionPool#with_connection'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:82:in 'ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:88:in 'ActiveRecord::SchemaMigration#integer_versions'
+activerecord (8.0.3) lib/active_record/migration.rb:1484:in 'ActiveRecord::Migrator#load_migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1480:in 'ActiveRecord::Migrator#migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1475:in 'ActiveRecord::Migrator#pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:762:in 'block (2 levels) in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration/pending_migration_connection.rb:8:in 'ActiveRecord::PendingMigrationConnection.with_temporary_pool'
+activerecord (8.0.3) lib/active_record/migration.rb:761:in 'block in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'Array#each'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:739:in 'ActiveRecord::Migration.check_pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:659:in 'block (2 levels) in ActiveRecord::Migration::CheckPending#call'
+activesupport (8.0.3) lib/active_support/file_update_checker.rb:85:in 'ActiveSupport::FileUpdateChecker#execute'
+activerecord (8.0.3) lib/active_record/migration.rb:664:in 'block in ActiveRecord::Migration::CheckPending#call'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'Thread::Mutex#synchronize'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.3) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.3) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.3) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.1) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.1) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.1) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.3) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/" for ::1 at 2025-10-13 21:53:19 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CareApp2'*/[0m
+  
+ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+)
+Caused by: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+)
+
+Information for: ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+):
+  
+
+Information for cause: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+):
+  
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'PG::Connection#exec'
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements#perform_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:556:in 'block (2 levels) in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1017:in 'block in ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activesupport (8.0.3) lib/active_support/concurrency/null_lock.rb:9:in 'ActiveSupport::Concurrency::NullLock#synchronize'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:986:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:555:in 'block in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activesupport (8.0.3) lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1137:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#log'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:554:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:591:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:547:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_exec_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:693:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:73:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:262:in 'ActiveRecord::ConnectionAdapters::QueryCache#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:102:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_rows'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:96:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_values'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:83:in 'block in ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in 'ActiveRecord::ConnectionAdapters::ConnectionPool#with_connection'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:82:in 'ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:88:in 'ActiveRecord::SchemaMigration#integer_versions'
+activerecord (8.0.3) lib/active_record/migration.rb:1484:in 'ActiveRecord::Migrator#load_migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1480:in 'ActiveRecord::Migrator#migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1475:in 'ActiveRecord::Migrator#pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:762:in 'block (2 levels) in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration/pending_migration_connection.rb:8:in 'ActiveRecord::PendingMigrationConnection.with_temporary_pool'
+activerecord (8.0.3) lib/active_record/migration.rb:761:in 'block in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'Array#each'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:739:in 'ActiveRecord::Migration.check_pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:659:in 'block (2 levels) in ActiveRecord::Migration::CheckPending#call'
+activesupport (8.0.3) lib/active_support/file_update_checker.rb:85:in 'ActiveSupport::FileUpdateChecker#execute'
+activerecord (8.0.3) lib/active_record/migration.rb:664:in 'block in ActiveRecord::Migration::CheckPending#call'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'Thread::Mutex#synchronize'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.3) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.3) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.3) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.1) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.1) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.1) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.3) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/" for ::1 at 2025-10-13 21:53:21 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CareApp2'*/[0m
+  
+ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+)
+Caused by: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+)
+
+Information for: ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+):
+  
+
+Information for cause: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+):
+  
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'PG::Connection#exec'
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements#perform_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:556:in 'block (2 levels) in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1017:in 'block in ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activesupport (8.0.3) lib/active_support/concurrency/null_lock.rb:9:in 'ActiveSupport::Concurrency::NullLock#synchronize'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:986:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:555:in 'block in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activesupport (8.0.3) lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1137:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#log'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:554:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:591:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:547:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_exec_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:693:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:73:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:262:in 'ActiveRecord::ConnectionAdapters::QueryCache#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:102:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_rows'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:96:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_values'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:83:in 'block in ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in 'ActiveRecord::ConnectionAdapters::ConnectionPool#with_connection'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:82:in 'ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:88:in 'ActiveRecord::SchemaMigration#integer_versions'
+activerecord (8.0.3) lib/active_record/migration.rb:1484:in 'ActiveRecord::Migrator#load_migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1480:in 'ActiveRecord::Migrator#migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1475:in 'ActiveRecord::Migrator#pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:762:in 'block (2 levels) in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration/pending_migration_connection.rb:8:in 'ActiveRecord::PendingMigrationConnection.with_temporary_pool'
+activerecord (8.0.3) lib/active_record/migration.rb:761:in 'block in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'Array#each'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:739:in 'ActiveRecord::Migration.check_pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:659:in 'block (2 levels) in ActiveRecord::Migration::CheckPending#call'
+activesupport (8.0.3) lib/active_support/file_update_checker.rb:85:in 'ActiveSupport::FileUpdateChecker#execute'
+activerecord (8.0.3) lib/active_record/migration.rb:664:in 'block in ActiveRecord::Migration::CheckPending#call'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'Thread::Mutex#synchronize'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.3) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.3) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.3) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.1) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.1) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.1) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.3) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2025-10-13 21:53:21 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CareApp2'*/[0m
+  
+ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+)
+Caused by: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+)
+
+Information for: ActiveRecord::StatementInvalid (PG::InsufficientPrivilege: ERROR:  permission denied for table schema_migrations
+):
+  
+
+Information for cause: PG::InsufficientPrivilege (ERROR:  permission denied for table schema_migrations
+):
+  
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'PG::Connection#exec'
+activerecord (8.0.3) lib/active_record/connection_adapters/postgresql/database_statements.rb:167:in 'ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements#perform_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:556:in 'block (2 levels) in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1017:in 'block in ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activesupport (8.0.3) lib/active_support/concurrency/null_lock.rb:9:in 'ActiveSupport::Concurrency::NullLock#synchronize'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:986:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#with_raw_connection'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:555:in 'block in ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activesupport (8.0.3) lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract_adapter.rb:1137:in 'ActiveRecord::ConnectionAdapters::AbstractAdapter#log'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:554:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#raw_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:591:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_execute'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:547:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#internal_exec_query'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:693:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:73:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/query_cache.rb:262:in 'ActiveRecord::ConnectionAdapters::QueryCache#select_all'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:102:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_rows'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/database_statements.rb:96:in 'ActiveRecord::ConnectionAdapters::DatabaseStatements#select_values'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:83:in 'block in ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in 'ActiveRecord::ConnectionAdapters::ConnectionPool#with_connection'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:82:in 'ActiveRecord::SchemaMigration#versions'
+activerecord (8.0.3) lib/active_record/schema_migration.rb:88:in 'ActiveRecord::SchemaMigration#integer_versions'
+activerecord (8.0.3) lib/active_record/migration.rb:1484:in 'ActiveRecord::Migrator#load_migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1480:in 'ActiveRecord::Migrator#migrated'
+activerecord (8.0.3) lib/active_record/migration.rb:1475:in 'ActiveRecord::Migrator#pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:762:in 'block (2 levels) in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration/pending_migration_connection.rb:8:in 'ActiveRecord::PendingMigrationConnection.with_temporary_pool'
+activerecord (8.0.3) lib/active_record/migration.rb:761:in 'block in ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'Array#each'
+activerecord (8.0.3) lib/active_record/migration.rb:760:in 'ActiveRecord::Migration.pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:739:in 'ActiveRecord::Migration.check_pending_migrations'
+activerecord (8.0.3) lib/active_record/migration.rb:659:in 'block (2 levels) in ActiveRecord::Migration::CheckPending#call'
+activesupport (8.0.3) lib/active_support/file_update_checker.rb:85:in 'ActiveSupport::FileUpdateChecker#execute'
+activerecord (8.0.3) lib/active_record/migration.rb:664:in 'block in ActiveRecord::Migration::CheckPending#call'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'Thread::Mutex#synchronize'
+activerecord (8.0.3) lib/active_record/migration.rb:656:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.3) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.3) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.3) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.3) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.2.1) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.2.1) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.3) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+propshaft (1.3.1) lib/propshaft/server.rb:37:in 'Propshaft::Server#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.2.1) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.3) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.3) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (7.0.4) lib/puma/configuration.rb:299:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (7.0.4) lib/puma/request.rb:101:in 'block in Puma::Request#handle_request'
+puma (7.0.4) lib/puma/thread_pool.rb:346:in 'Puma::ThreadPool#with_force_shutdown'
+puma (7.0.4) lib/puma/request.rb:100:in 'Puma::Request#handle_request'
+puma (7.0.4) lib/puma/server.rb:506:in 'Puma::Server#process_client'
+puma (7.0.4) lib/puma/server.rb:265:in 'block in Puma::Server#run'
+puma (7.0.4) lib/puma/thread_pool.rb:173:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/" for ::1 at 2025-10-13 21:55:28 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (2.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CareApp2'*/[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 59.1ms | GC: 0.0ms)
+Completed 200 OK in 173ms (Views: 63.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2025-10-13 21:55:30 +0900
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 18.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 19.7ms | GC: 0.0ms)
+Completed 200 OK in 152ms (Views: 20.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/login" for ::1 at 2025-10-13 21:55:37 +0900
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "email" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "ログイン"}
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'wataru1983_118@yahoo.co.jp' LIMIT 1 /*action='create',application='CareApp2',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:6:in 'SessionsController#create'
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 413ms (ActiveRecord: 44.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/users/1" for ::1 at 2025-10-13 21:55:38 +0900
+Processing by UsersController#show as TURBO_STREAM
+  Parameters: {"id" => "1"}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='CareApp2',controller='users'*/[0m
+  ↳ app/controllers/users_controller.rb:46:in 'UsersController#set_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:4:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering users/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (3.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 1 AND "active_storage_attachments"."record_type" = 'User' AND "active_storage_attachments"."name" = 'avatar' LIMIT 1 /*action='show',application='CareApp2',controller='users'*/[0m
+  ↳ app/views/users/show.html.erb:15
+  Rendered users/show.html.erb within layouts/application (Duration: 28.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 28.9ms | GC: 0.0ms)
+Completed 200 OK in 137ms (Views: 22.3ms | ActiveRecord: 9.7ms (3 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/symptoms" for ::1 at 2025-10-13 21:55:40 +0900
+Processing by SymptomsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/controllers/application_controller.rb:4:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering symptoms/index.html.erb within layouts/application
+  [1m[36mSymptom Load (3.4ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '腰痛' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (0.3ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '肩こり' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (0.3ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '首の痛み' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (0.2ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '膝の痛み' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (0.3ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '頭痛' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (0.3ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '眼精疲労' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  Rendered symptoms/index.html.erb within layouts/application (Duration: 158.4ms | GC: 19.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 159.3ms | GC: 19.5ms)
+Completed 200 OK in 314ms (Views: 154.0ms | ActiveRecord: 7.1ms (7 queries, 0 cached) | GC: 19.5ms)
+
+
+Started GET "/symptoms/4" for ::1 at 2025-10-13 21:55:41 +0900
+Processing by SymptomsController#show as HTML
+  Parameters: {"id" => "4"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/controllers/application_controller.rb:4:in 'ApplicationController#current_user'
+  [1m[36mSymptom Load (1.7ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."id" = 4 LIMIT 1 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/controllers/symptoms_controller.rb:9:in 'SymptomsController#show'
+  Rendering layout layouts/application.html.erb
+  Rendering symptoms/show.html.erb within layouts/application
+  [1m[36mExercise Exists? (6.2ms)[0m  [1m[34mSELECT 1 AS one FROM "exercises" WHERE "exercises"."symptom_id" = 4 LIMIT 1 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/show.html.erb:11
+  [1m[36mExercise Load (0.3ms)[0m  [1m[34mSELECT "exercises".* FROM "exercises" WHERE "exercises"."symptom_id" = 4 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/show.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 3 AND "active_storage_attachments"."record_type" = 'Exercise' AND "active_storage_attachments"."name" = 'video_file' LIMIT 1 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/models/exercise.rb:17:in 'Exercise#has_video?'
+  Rendered symptoms/show.html.erb within layouts/application (Duration: 27.3ms | GC: 1.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 28.0ms | GC: 1.0ms)
+Completed 200 OK in 186ms (Views: 20.9ms | ActiveRecord: 11.2ms (5 queries, 0 cached) | GC: 2.3ms)
+
+
+Started GET "/symptoms/4" for ::1 at 2025-10-13 21:55:41 +0900
+Processing by SymptomsController#show as HTML
+  Parameters: {"id" => "4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/controllers/application_controller.rb:4:in 'ApplicationController#current_user'
+  [1m[36mSymptom Load (0.2ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."id" = 4 LIMIT 1 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/controllers/symptoms_controller.rb:9:in 'SymptomsController#show'
+  Rendering layout layouts/application.html.erb
+  Rendering symptoms/show.html.erb within layouts/application
+  [1m[36mExercise Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "exercises" WHERE "exercises"."symptom_id" = 4 LIMIT 1 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/show.html.erb:11
+  [1m[36mExercise Load (0.2ms)[0m  [1m[34mSELECT "exercises".* FROM "exercises" WHERE "exercises"."symptom_id" = 4 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/show.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 3 AND "active_storage_attachments"."record_type" = 'Exercise' AND "active_storage_attachments"."name" = 'video_file' LIMIT 1 /*action='show',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/models/exercise.rb:17:in 'Exercise#has_video?'
+  Rendered symptoms/show.html.erb within layouts/application (Duration: 8.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.7ms | GC: 0.0ms)
+Completed 200 OK in 111ms (Views: 8.1ms | ActiveRecord: 1.3ms (5 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/exercises/3" for ::1 at 2025-10-13 21:55:42 +0900
+Processing by ExercisesController#show as HTML
+  Parameters: {"id" => "3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='CareApp2',controller='exercises'*/[0m
+  ↳ app/controllers/application_controller.rb:4:in 'ApplicationController#current_user'
+  [1m[36mExercise Load (2.3ms)[0m  [1m[34mSELECT "exercises".* FROM "exercises" WHERE "exercises"."id" = 3 LIMIT 1 /*action='show',application='CareApp2',controller='exercises'*/[0m
+  ↳ app/controllers/exercises_controller.rb:29:in 'ExercisesController#set_exercise'
+  Rendering layout layouts/application.html.erb
+  Rendering exercises/show.html.erb within layouts/application
+  [1m[36mFavorite Exists? (6.4ms)[0m  [1m[34mSELECT 1 AS one FROM "favorites" WHERE "favorites"."user_id" = 1 AND "favorites"."exercise_id" = 3 LIMIT 1 /*action='show',application='CareApp2',controller='exercises'*/[0m
+  ↳ app/models/user.rb:20:in 'User#favorited?'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 3 AND "active_storage_attachments"."record_type" = 'Exercise' AND "active_storage_attachments"."name" = 'video_file' LIMIT 1 /*action='show',application='CareApp2',controller='exercises'*/[0m
+  ↳ app/views/exercises/show.html.erb:26
+  Rendered exercises/show.html.erb within layouts/application (Duration: 19.2ms | GC: 0.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 20.4ms | GC: 0.4ms)
+Completed 200 OK in 154ms (Views: 13.1ms | ActiveRecord: 11.3ms (4 queries, 0 cached) | GC: 0.9ms)
+
+
+Started DELETE "/exercises/3/unfavorite" for ::1 at 2025-10-13 21:55:44 +0900
+Processing by FavoritesController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "exercise_id" => "3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='destroy',application='CareApp2',controller='favorites'*/[0m
+  ↳ app/controllers/application_controller.rb:4:in 'ApplicationController#current_user'
+Completed 404 Not Found in 101ms (ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Favorite without an ID):
+  
+app/controllers/favorites_controller.rb:45:in 'FavoritesController#set_favorite'
+Started GET "/exercises/3" for ::1 at 2025-10-13 21:55:44 +0900
+Processing by ExercisesController#show as HTML
+  Parameters: {"id" => "3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='CareApp2',controller='exercises'*/[0m
+  ↳ app/controllers/application_controller.rb:4:in 'ApplicationController#current_user'
+  [1m[36mExercise Load (0.2ms)[0m  [1m[34mSELECT "exercises".* FROM "exercises" WHERE "exercises"."id" = 3 LIMIT 1 /*action='show',application='CareApp2',controller='exercises'*/[0m
+  ↳ app/controllers/exercises_controller.rb:29:in 'ExercisesController#set_exercise'
+  Rendering layout layouts/application.html.erb
+  Rendering exercises/show.html.erb within layouts/application
+  [1m[36mFavorite Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "favorites" WHERE "favorites"."user_id" = 1 AND "favorites"."exercise_id" = 3 LIMIT 1 /*action='show',application='CareApp2',controller='exercises'*/[0m
+  ↳ app/models/user.rb:20:in 'User#favorited?'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 3 AND "active_storage_attachments"."record_type" = 'Exercise' AND "active_storage_attachments"."name" = 'video_file' LIMIT 1 /*action='show',application='CareApp2',controller='exercises'*/[0m
+  ↳ app/views/exercises/show.html.erb:26
+  Rendered exercises/show.html.erb within layouts/application (Duration: 9.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.1ms | GC: 0.0ms)
+Completed 200 OK in 127ms (Views: 10.0ms | ActiveRecord: 1.0ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/symptoms" for ::1 at 2025-10-13 21:55:48 +0900
+Processing by SymptomsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/controllers/application_controller.rb:4:in 'ApplicationController#current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering symptoms/index.html.erb within layouts/application
+  [1m[36mSymptom Load (0.2ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '腰痛' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (0.2ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '肩こり' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (0.2ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '首の痛み' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (0.3ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '膝の痛み' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (0.5ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '頭痛' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  [1m[36mSymptom Load (1.3ms)[0m  [1m[34mSELECT "symptoms".* FROM "symptoms" WHERE "symptoms"."name" = '眼精疲労' LIMIT 1 /*action='index',application='CareApp2',controller='symptoms'*/[0m
+  ↳ app/views/symptoms/index.html.erb:37
+  Rendered symptoms/index.html.erb within layouts/application (Duration: 26.3ms | GC: 2.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 27.1ms | GC: 2.2ms)
+Completed 200 OK in 149ms (Views: 24.7ms | ActiveRecord: 3.2ms (7 queries, 0 cached) | GC: 2.2ms)
+
+
