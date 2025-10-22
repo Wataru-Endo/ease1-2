@@ -6,14 +6,20 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+・Ruby 3.4.4
+・Rails 8.0.3
 
-* System dependencies
+* 実行手順
+・
 
-* Configuration
+* カタログ設計
+・
 
-* Database creation
+* テーブル設計
+・
 
-* Database initialization
+* ワイヤーフレーム
+・
 
 * How to run the test suite
 

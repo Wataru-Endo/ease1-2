@@ -1,101 +1,146 @@
 <!-- filepath: /Users/endouwataru/care_app2/app/views/exercises/show.html.erb -->
-<div class="container mt-5">
+<div class="container mt-4">
   <div class="row">
-    <div class="col-md-10 offset-md-1">
+    <div class="col-md-8">
       <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <div>
-            <h2><%= @exercise.title %></h2>
-            <p class="text-muted mb-0">所要時間: <%= @exercise.duration %>分</p>
-          </div>
-          <!-- お気に入りボタンを追加 -->
-            <%= favorite_button(@exercise) %>
-          <%= link_to "編集", edit_exercise_path(@exercise), class: "btn btn-outline-primary" %>
-        </div>
+        <% if @exercise.image.attached? %>
+          <%= image_tag @exercise.image, class: "card-img-top", style: "height: 300px; object-fit: cover;" %>
+        <% end %>
+        
         <div class="card-body">
-          <!-- 動画エリア -->
-          <div class="video-section mb-4">
-            <% if @exercise.youtube_url.present? %>
-              <!-- YouTube動画 -->
-              <div class="video-container">
-                <iframe src="<%= @exercise.youtube_embed_url %>" 
-                        frameborder="0" 
-                        allowfullscreen>
-                </iframe>
-              </div>
-            <% elsif @exercise.video_file.attached? %>
-              <!-- 自作動画ファイル -->
-              <div class="video-container">
-                <video controls>
-                  <source src="<%= url_for(@exercise.video_file) %>" type="video/mp4">
-                  お使いのブラウザは動画をサポートしていません。
-                </video>
-              </div>
+          <h1 class="card-title">
+            <% if @exercise.selfcare? %>
+              <i class="fas fa-heart text-success me-2"></i>
             <% else %>
-              <!-- 動画なしの場合 -->
-              <div class="bg-light d-flex align-items-center justify-content-center video-placeholder">
-                <div class="text-center">
-                  <i class="fas fa-video fa-3x text-secondary mb-3"></i>
-                  <p class="text-muted">動画はありません</p>
-                </div>
-              </div>
+              <i class="fas fa-dumbbell text-primary me-2"></i>
             <% end %>
+            <%= @exercise.title %>
+          </h1>
+          
+          <div class="mb-3">
+            <span class="badge <%= @exercise.selfcare? ? 'bg-success' : 'bg-primary' %> me-2">
+              <%= @exercise.category || (@exercise.selfcare? ? 'セルフケア' : 'エクササイズ') %>
+            </span>
+            <small class="text-muted">
+              症状: <%= @exercise.symptom&.name || "未分類" %> | 
+              時間: <%= @exercise.duration %>分
+            </small>
           </div>
-
-          <!-- エクササイズ説明 -->
-          <div class="exercise-description mb-4">
-            <h5><i class="fas fa-info-circle me-2"></i>エクササイズの説明</h5>
-            <p><%= simple_format(@exercise.description) %></p>
+          
+          <div class="mb-4">
+            <%= simple_format(@exercise.description) %>
           </div>
-
-          <!-- 実施手順 -->
-          <% if @exercise.instructions.present? %>
-            <div class="exercise-instructions mb-4">
-              <h5><i class="fas fa-list-ol me-2"></i>実施方法</h5>
-              <p><%= simple_format(@exercise.instructions) %></p>
+          
+          <!-- 動画表示 -->
+          <% if @exercise.has_video? %>
+            <div class="mb-4">
+              <h5>📹 動画</h5>
+              <% if @exercise.youtube_url.present? %>
+                <div class="ratio ratio-16x9">
+                  <iframe src="<%= @exercise.youtube_embed_url %>" allowfullscreen></iframe>
+                </div>
+              <% elsif @exercise.video_file.attached? %>
+                <video controls class="w-100">
+                  <source src="<%= url_for(@exercise.video_file) %>" type="video/mp4">
+                </video>
+              <% end %>
             </div>
           <% end %>
-
-          <!-- 詳細手順 -->
+          
+          <!-- 手順表示 -->
+          <% if @exercise.instructions.present? %>
+            <div class="mb-4">
+              <h5>📋 手順</h5>
+              <%= simple_format(@exercise.instructions) %>
+            </div>
+          <% end %>
+          
           <% if @exercise.steps.present? %>
-            <div class="exercise-steps mb-4">
-              <h5><i class="fas fa-clipboard-list me-2"></i>詳細手順</h5>
-              <div><%= simple_format(@exercise.steps) %></div>
+            <div class="mb-4">
+              <h5>👣 ステップ</h5>
+              <%= simple_format(@exercise.steps) %>
             </div>
           <% end %>
         </div>
       </div>
-
-      <!-- ナビゲーション -->
-      <div class="text-center mt-4">
-        <%= link_to "症状選択に戻る", symptoms_path, class: "btn btn-secondary" %>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5>アクション</h5>
+        </div>
+        <div class="card-body">
+          <!-- 全ユーザー共通: 戻るボタン -->
+          <% if @exercise.selfcare? %>
+            <%= link_to "セルフケア一覧に戻る", selfcares_path, class: "btn btn-outline-success w-100 mb-2" %>
+          <% else %>
+            <%= link_to "エクササイズ一覧に戻る", exercises_path, class: "btn btn-outline-primary w-100 mb-2" %>
+          <% end %>
+          
+          <!-- お気に入りボタン（全ユーザー対象） -->
+          <% if current_user %>
+            <% favorite = current_user.favorites.find_by(exercise: @exercise) %>
+            <% if favorite %>
+              <!-- お気に入り解除 -->
+              <%= link_to favorite_path(favorite), method: :delete, 
+                  class: "btn btn-danger w-100 mb-2",
+                  confirm: "お気に入りを解除しますか？" do %>
+                <i class="fas fa-heart me-2"></i>お気に入り解除 
+                <span class="badge bg-light text-dark"><%= @exercise.favorites_count %></span>
+              <% end %>
+            <% else %>
+              <!-- お気に入り追加 -->
+              <%= form_with url: favorites_path, method: :post, local: true do |form| %>
+                <%= form.hidden_field :exercise_id, value: @exercise.id %>
+                <%= form.submit "お気に入り追加", class: "btn btn-outline-danger w-100 mb-2" %>
+              <% end %>
+            <% end %>
+          <% end %>
+          
+          <!-- 管理者のみ編集・削除ボタン表示 -->
+          <% if current_user&.admin? %>
+            <hr>
+            <h6 class="text-danger">👑 管理者メニュー</h6>
+            <%= link_to "編集", edit_exercise_path(@exercise), class: "btn btn-warning w-100 mb-2" %>
+            <%= link_to "削除", exercise_path(@exercise), method: :delete, 
+                class: "btn btn-danger w-100",
+                confirm: "本当に削除しますか？" %>
+          <% end %>
+        </div>
+      </div>
+      
+      <!-- ユーザー情報表示 -->
+      <div class="card mt-3">
+        <div class="card-body">
+          <h6>現在のユーザー</h6>
+          <% if current_user %>
+            <div class="d-flex align-items-center">
+              <span class="badge <%= current_user.admin? ? 'bg-danger' : 'bg-primary' %> me-2">
+                <%= current_user.role_display %>
+              </span>
+              <span><%= current_user.name %></span>
+            </div>
+            
+            <!-- 管理者権限の詳細表示 -->
+            <% if current_user.admin? %>
+              <small class="text-muted d-block mt-1">
+                <i class="fas fa-check-circle text-success me-1"></i>編集権限あり
+              </small>
+            <% else %>
+              <small class="text-muted d-block mt-1">
+                <i class="fas fa-eye text-info me-1"></i>閲覧のみ
+              </small>
+            <% end %>
+          <% else %>
+            <span class="text-muted">ログインしていません</span>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<style>
-.video-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 アスペクト比 */
-  height: 0;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.video-container iframe,
-.video-container video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.video-placeholder {
-  height: 300px;
-  border-radius: 8px;
-  border: 2px dashed #dee2e6;
-}
-</style>
+<div class="mt-4 text-center">
+  <%= link_to "戻る", request.referer || root_path, class: "btn btn-secondary" %>
+</div>

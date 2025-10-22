@@ -1,24 +1,49 @@
 module ApplicationHelper
-  def favorite_button(exercise)
-    if logged_in?
-      if current_user.favorited?(exercise)
-        # お気に入り済み - 削除ボタン
-        button_to exercise_unfavorite_path(exercise), 
-                  method: :delete, 
-                  class: "btn btn-warning btn-sm favorite-btn",
-                  style: "display: inline-block;",
-                  data: { confirm: "お気に入りから削除しますか？" } do
-          content_tag(:i, "", class: "fas fa-heart me-1") + "お気に入り済み"
-        end
-      else
-        # 未お気に入り - 追加ボタン
-        button_to exercise_favorite_path(exercise), 
-                  method: :post, 
-                  class: "btn btn-outline-warning btn-sm favorite-btn",
-                  style: "display: inline-block;" do
-          content_tag(:i, "", class: "far fa-heart me-1") + "お気に入りに追加"
-        end
+  # お気に入りボタンヘルパー
+  def favorite_button(exercise, options = {})
+    return unless current_user
+    
+    css_class = options[:class] || "btn btn-sm"
+    
+    if current_user.favorited?(exercise)
+      link_to exercise_favorite_path(exercise), method: :delete, 
+              class: "#{css_class} btn-danger favorite-btn" do
+        content_tag :i, "", class: "fas fa-heart"
       end
+    else
+      link_to exercise_favorites_path(exercise), method: :post, 
+              class: "#{css_class} btn-outline-danger favorite-btn" do
+        content_tag :i, "", class: "far fa-heart"
+      end
+    end
+  end
+  
+  # 症状バッジカラー
+  def symptom_badge_color(symptom_name)
+    case symptom_name
+    when '腰痛'
+      'danger'
+    when '肩こり'
+      'warning'
+    when '首の痛み'
+      'info'
+    when '膝の痛み'
+      'success'
+    when '頭痛'
+      'secondary'
+    when '眼精疲労'
+      'primary'
+    else
+      'light'
+    end
+  end
+  
+  # エクササイズタイプバッジ
+  def exercise_type_badge(exercise)
+    if exercise.selfcare?
+      content_tag :span, "🌸 セルフケア", class: "badge bg-success"
+    else
+      content_tag :span, "💪 エクササイズ", class: "badge bg-primary"
     end
   end
 end

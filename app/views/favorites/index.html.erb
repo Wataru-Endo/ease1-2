@@ -5,49 +5,83 @@
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
           <h2><i class="fas fa-heart text-warning me-2"></i>お気に入りのエクササイズ</h2>
-          <!-- @favorite_exercises を @favorites に変更 -->
-          <span class="badge bg-warning text-dark"><%= @favorites.count %>件</span>
+          <span class="badge bg-warning text-dark"><%= @favorites&.count || 0 %>件</span>
         </div>
         
-        <!-- @favorite_exercises を @favorites に変更 -->
-        <% if @favorites.any? %>
+        <% if @favorites&.any? %>
           <div class="card-body">
             <div class="row g-4">
-              <!-- @favorite_exercises を @favorites に変更し、favorite.exercise でアクセス -->
               <% @favorites.each do |favorite| %>
-                <div class="col-md-6 col-lg-4">
-                  <div class="card h-100 exercise-card">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-start mb-2">
-                        <span class="badge bg-<%= case favorite.exercise.symptom.name
-                          when '腰痛' then 'danger'
-                          when '肩こり' then 'warning'
-                          when '首の痛み' then 'info'
-                          when '膝の痛み' then 'success'
-                          when '頭痛' then 'secondary'
-                          when '眼精疲労' then 'primary'
-                          else 'light'
-                        end %>">
-                          <%= favorite.exercise.symptom.name %>
-                        </span>
-                        <%= favorite_button(favorite.exercise) %>
+                <% if favorite.exercise.present? %>
+                  <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 exercise-card">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                          <% if favorite.exercise.symptom.present? %>
+                            <span class="badge bg-<%= case favorite.exercise.symptom.name
+                              when '腰痛' then 'danger'
+                              when '肩こり' then 'warning'
+                              when '首の痛み' then 'info'
+                              when '膝の痛み' then 'success'
+                              when '頭痛' then 'secondary'
+                              when '眼精疲労' then 'primary'
+                              else 'light'
+                            end %>">
+                              <%= favorite.exercise.symptom.name %>
+                            </span>
+                          <% else %>
+                            <span class="badge bg-light">未分類</span>
+                          <% end %>
+                          
+                          <!-- routes.rbに対応したお気に入りボタン -->
+                          <% if current_user %>
+                            <% if current_user.favorited?(favorite.exercise) %>
+                              <%= link_to favorite_path(favorite), method: :delete, 
+                                  class: "btn btn-sm btn-danger favorite-btn",
+                                  confirm: "お気に入りから削除しますか？" do %>
+                                <i class="fas fa-heart"></i>
+                              <% end %>
+                            <% else %>
+                              <%= link_to exercise_favorite_path(favorite.exercise), method: :post, 
+                                  class: "btn btn-sm btn-outline-danger favorite-btn" do %>
+                                <i class="far fa-heart"></i>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        </div>
+                        
+                        <h5 class="card-title">
+                          <%= link_to favorite.exercise.title, exercise_path(favorite.exercise), 
+                              class: "text-decoration-none" %>
+                        </h5>
+                        <p class="card-text text-muted small">
+                          <%= truncate(favorite.exercise.description, length: 80) %>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <small class="text-muted">
+                            <i class="fas fa-clock me-1"></i>所要時間: <%= favorite.exercise.duration || 0 %>分
+                          </small>
+                          <small class="text-muted">
+                            <i class="fas fa-heart me-1"></i><%= favorite.exercise.favorites_count || 0 %>
+                          </small>
+                        </div>
+                        
+                        <!-- エクササイズタイプ表示 -->
+                        <div class="mt-2">
+                          <% if favorite.exercise.respond_to?(:selfcare?) && favorite.exercise.selfcare? %>
+                            <span class="badge bg-success">🌸 セルフケア</span>
+                          <% else %>
+                            <span class="badge bg-primary">💪 エクササイズ</span>
+                          <% end %>
+                        </div>
                       </div>
-                      
-                      <h5 class="card-title"><%= favorite.exercise.title %></h5>
-                      <p class="card-text text-muted small">
-                        <%= truncate(favorite.exercise.description, length: 80) %>
-                      </p>
-                      <p class="card-text">
-                        <small class="text-muted">
-                          <i class="fas fa-clock me-1"></i>所要時間: <%= favorite.exercise.duration %>分
-                        </small>
-                      </p>
-                    </div>
-                    <div class="card-footer bg-transparent">
-                      <%= link_to "詳細を見る", exercise_path(favorite.exercise), class: "btn btn-primary btn-sm w-100" %>
+                      <div class="card-footer bg-transparent">
+                        <%= link_to "詳細を見る", exercise_path(favorite.exercise), 
+                            class: "btn btn-primary btn-sm w-100" %>
+                      </div>
                     </div>
                   </div>
-                </div>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -57,9 +91,12 @@
               <i class="fas fa-heart-broken fa-4x text-muted mb-3"></i>
               <h4 class="text-muted">お気に入りのエクササイズがありません</h4>
               <p class="text-muted mb-4">
-                気になるエクササイズを見つけて、お気に入りに追加してみましょう！
+                気になるエクササイズやセルフケアを見つけて、お気に入りに追加してみましょう！
               </p>
-              <%= link_to "症状を選択してエクササイズを探す", symptoms_path, class: "btn btn-primary" %>
+              <div class="d-flex justify-content-center gap-2">
+                <%= link_to "🏃‍♀️ エクササイズを探す", exercises_path, class: "btn btn-primary" %>
+                <%= link_to "🩺 症状から探す", symptoms_path, class: "btn btn-success" %>
+              </div>
             </div>
           </div>
         <% end %>
@@ -67,16 +104,25 @@
 
       <!-- ナビゲーション -->
       <div class="text-center mt-4">
-        <%= link_to "症状選択", symptoms_path, class: "btn btn-outline-primary me-2" %>
-        <%= link_to "プロフィール", user_path(current_user), class: "btn btn-outline-secondary" %>
+        <%= link_to "🩺 症状選択", symptoms_path, class: "btn btn-outline-primary me-2" %>
+        <%= link_to "🏃‍♀️ エクササイズ", exercises_path, class: "btn btn-outline-info me-2" %>
+        <% if current_user %>
+          <%= link_to "👤 プロフィール", user_path(current_user), class: "btn btn-outline-secondary" %>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
 
+<div class="mt-4 text-center">
+  <button class="btn btn-secondary" onclick="window.history.back(); return false;">戻る</button>
+</div>
+
 <style>
 .exercise-card {
   transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .exercise-card:hover {
@@ -86,13 +132,32 @@
 
 .favorite-btn {
   transition: all 0.3s ease;
+  border: none;
+  background: none;
+  padding: 0.25rem;
 }
 
 .favorite-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+}
+
+.favorite-btn i {
+  font-size: 1.2rem;
 }
 
 .empty-state {
   padding: 2rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+}
+
+.card-title a {
+  color: inherit;
+}
+
+.card-title a:hover {
+  color: #0d6efd;
 }
 </style>

@@ -1,0 +1,54 @@
+<!-- filepath: /Users/endouwataru/care_app2/app/views/sessions/admin_login.html.erb -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-danger text-white text-center">
+          <h2><i class="fas fa-user-shield me-2"></i>管理者ログイン</h2>
+          <p class="mb-0">セルフケアアプリ管理画面</p>
+        </div>
+        <div class="card-body">
+          <%= form_with url: admin_login_path, method: :post, local: true do |form| %>
+            <div class="mb-3">
+              <%= form.label :email, "管理者メールアドレス", class: "form-label" %>
+              <%= form.email_field :email, class: "form-control", placeholder: "admin@example.com" %>
+            </div>
+            
+            <div class="mb-3">
+              <%= form.label :password, "管理者パスワード", class: "form-label" %>
+              <%= form.password_field :password, class: "form-control", placeholder: "管理者パスワードを入力" %>
+            </div>
+            
+            <div class="d-grid">
+              <%= form.submit "管理者ログイン", class: "btn btn-danger" %>
+            </div>
+          <% end %>
+          
+          <!-- 通常ログインリンク -->
+          <div class="text-center mt-3">
+            <p class="text-muted">一般ユーザーの方は</p>
+            <%= link_to "ユーザーログイン", login_path, class: "btn btn-outline-primary" %>
+          </div>
+          
+          <!-- 管理者権限の説明 -->
+          <div class="alert alert-warning mt-3">
+            <h6><i class="fas fa-exclamation-triangle me-2"></i>管理者権限</h6>
+            <ul class="mb-0 small">
+              <li>セルフケア記事の作成・編集・削除</li>
+              <li>症状情報の管理</li>
+              <li>エクササイズの管理</li>
+              <li>ユーザー情報の管理</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- トップページに戻るボタン -->
+        <div class="card-footer text-center bg-light">
+          <%= link_to root_path, class: "btn btn-link text-muted" do %>
+            <i class="fas fa-arrow-left me-2"></i>トップページに戻る
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

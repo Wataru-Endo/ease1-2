@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_12_135916) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_19_112052) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_12_135916) do
     t.datetime "updated_at", null: false
     t.string "youtube_url"
     t.text "instructions"
+    t.string "category"
+    t.integer "item_type", default: 0, null: false
+    t.boolean "published", default: true, null: false
+    t.index ["item_type"], name: "index_exercises_on_item_type"
+    t.index ["published"], name: "index_exercises_on_published"
     t.index ["symptom_id"], name: "index_exercises_on_symptom_id"
   end
 
@@ -83,6 +88,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_12_135916) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "content"
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,6 +103,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_12_135916) do
     t.float "height"
     t.float "weight"
     t.string "primary_symptom"
+    t.boolean "admin"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -4,7 +4,7 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h2>エクササイズ編集</h2>
+          <h2>💪 エクササイズを編集</h2>
         </div>
         <div class="card-body">
           <%= form_with model: @exercise, local: true do |form| %>
@@ -17,52 +17,78 @@
                 </ul>
               </div>
             <% end %>
-
-            <!-- 基本情報 -->
+            
             <div class="mb-3">
-              <%= form.label :title, "タイトル", class: "form-label" %>
+              <%= form.label :title, "エクササイズ名", class: "form-label" %>
               <%= form.text_field :title, class: "form-control" %>
             </div>
-
+            
             <div class="mb-3">
               <%= form.label :description, "説明", class: "form-label" %>
-              <%= form.text_area :description, class: "form-control", rows: 3 %>
+              <%= form.text_area :description, class: "form-control", rows: 4 %>
             </div>
-
+            
             <div class="mb-3">
               <%= form.label :duration, "所要時間（分）", class: "form-label" %>
               <%= form.number_field :duration, class: "form-control", min: 1 %>
             </div>
-
-            <!-- 動画設定 -->
-            <h5 class="mt-4 mb-3">動画設定</h5>
             
             <div class="mb-3">
-              <%= form.label :youtube_url, "YouTube URL（オプション）", class: "form-label" %>
-              <%= form.url_field :youtube_url, class: "form-control", placeholder: "https://www.youtube.com/watch?v=..." %>
-              <div class="form-text">YouTube動画のURLを入力してください</div>
+              <%= form.label :symptom_id, "対象症状", class: "form-label" %>
+              <%= form.collection_select :symptom_id, @symptoms, :id, :name, 
+                  { prompt: "症状を選択してください" }, 
+                  { class: "form-select" } %>
             </div>
-
+            
             <div class="mb-3">
-              <%= form.label :video_file, "動画ファイル（オプション）", class: "form-label" %>
-              <%= form.file_field :video_file, class: "form-control", accept: "video/*" %>
-              <div class="form-text">MP4, MOV, AVIなどの動画ファイルをアップロード</div>
+              <%= form.label :category, "カテゴリ", class: "form-label" %>
+              <%= form.select :category, 
+                  options_for_select(Exercise::CATEGORIES.map { |cat| [cat, cat] }, @exercise.category),
+                  { prompt: "カテゴリを選択してください" },
+                  { class: "form-select" } %>
             </div>
-
-            <!-- 詳細情報 -->
+            
+            <div class="mb-3">
+              <%= form.label :image, "画像", class: "form-label" %>
+              <%= form.file_field :image, class: "form-control", accept: "image/*" %>
+              <% if @exercise.image.attached? %>
+                <div class="mt-2">
+                  <small class="text-muted">現在の画像:</small><br>
+                  <%= image_tag @exercise.image, style: "max-width: 200px; height: auto;" %>
+                </div>
+              <% end %>
+            </div>
+            
+            <div class="mb-3">
+              <%= form.label :youtube_url, "YouTube URL", class: "form-label" %>
+              <%= form.url_field :youtube_url, class: "form-control", 
+                  placeholder: "https://www.youtube.com/watch?v=..." %>
+            </div>
+            
+            <div class="mb-3">
+              <%= form.label :video_file, "動画ファイル", class: "form-label" %>
+              <%= form.file_field :video_file, class: "form-control", accept: "video/*" %>
+              <div class="form-text">YouTube URLまたは動画ファイルのどちらかを入力してください</div>
+            </div>
+            
             <div class="mb-3">
               <%= form.label :instructions, "実施方法", class: "form-label" %>
-              <%= form.text_area :instructions, class: "form-control", rows: 4, placeholder: "エクササイズの実施方法を詳しく説明してください" %>
+              <%= form.text_area :instructions, class: "form-control", rows: 3 %>
             </div>
-
+            
             <div class="mb-3">
-              <%= form.label :steps, "詳細手順", class: "form-label" %>
-              <%= form.text_area :steps, class: "form-control", rows: 6, placeholder: "1. 最初の手順&#10;2. 次の手順&#10;3. ..." %>
+              <%= form.label :steps, "手順", class: "form-label" %>
+              <%= form.text_area :steps, class: "form-control", rows: 3 %>
             </div>
-
-            <div class="d-grid gap-2">
-              <%= form.submit "更新", class: "btn btn-primary" %>
-              <%= link_to "キャンセル", exercise_path(@exercise), class: "btn btn-secondary" %>
+            
+            <div class="mb-3 form-check">
+              <%= form.check_box :published, class: "form-check-input" %>
+              <%= form.label :published, "公開する", class: "form-check-label" %>
+            </div>
+            
+            <div class="d-flex justify-content-between">
+              <%= link_to "戻る", exercise_path(@exercise), class: "btn btn-secondary" %>
+              <%= form.submit "エクササイズを更新", class: "btn btn-primary" %>
             </div>
           <% end %>
         </div>

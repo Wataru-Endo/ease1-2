@@ -2,6 +2,9 @@ class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :exercise
   
-  # バリデーション（同じユーザーが同じエクササイズを重複してお気に入りできないように）
+  # 重複防止
   validates :user_id, uniqueness: { scope: :exercise_id }
+  
+  # スコープ
+  scope :recent, -> { order(created_at: :desc) }
 end

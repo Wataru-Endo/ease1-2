@@ -1,111 +1,100 @@
 <!-- filepath: /Users/endouwataru/care_app2/app/views/symptoms/index.html.erb -->
 <div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>🩺 症状一覧</h1>
+    
+    <div class="d-flex align-items-center">
+      <!-- 管理者のみ症状作成ボタン表示 -->
+      <% if current_user&.admin? %>
+        <%= link_to "💊 症状作成", new_symptom_path, class: "btn btn-primary me-2" %>
+      <% end %>
+      
+      <div class="me-3">
+        <% if current_user %>
+          <span class="badge <%= current_user.admin? ? 'bg-danger' : 'bg-primary' %>">
+            <%= current_user.role_display %>
+          </span>
+          <%= current_user.name %>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- 権限に応じたメッセージ -->
+  <% if current_user&.admin? %>
+    <div class="alert alert-danger mb-4">
+      <strong>👑 管理者モードです。</strong> 症状の編集が可能です。
+    </div>
+  <% else %>
+    <div class="alert alert-primary mb-4">
+      <strong>👤 ユーザーモードです。</strong> 症状の閲覧が可能です。
+    </div>
+  <% end %>
+  
+  <!-- 症状一覧 -->
   <div class="row">
-    <div class="col-md-10 offset-md-1">
-      <div class="card">
-        <div class="card-header text-center">
-          <h2><i class="fas fa-search me-2"></i>お困りの症状を選択してください</h2>
-          <p class="mb-0 text-muted">該当する症状をクリックして、適切なセルフケアを見つけましょう</p>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <% 
-            # 症状の順序を定義
-            symptom_order = ["腰痛", "肩こり", "首の痛み", "膝の痛み", "頭痛", "眼精疲労"]
-            colors = ["danger", "warning", "info", "success", "secondary", "primary"]
-            icons = ["user-injured", "hand-paper", "head-side-cough", "walking", "brain", "eye"]
-            descriptions = [
-              "腰の痛み、だるさ、重い感じ",
-              "肩の張り、こり、重い感じ", 
-              "首のこり、寝違え、ストレートネック",
-              "膝の痛み、違和感、歩行時の不快感",
-              "緊張型頭痛、目の疲れからくる頭痛",
-              "目の疲れ、ドライアイ、視界のぼやけ"
-            ]
+    <% @symptoms.each do |symptom| %>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+          <% if symptom.image.attached? %>
+            <%= image_tag symptom.image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+          <% else %>
+            <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
+              <i class="fas fa-stethoscope fa-3x text-muted"></i>
+            </div>
+          <% end %>
+          
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to symptom.name, symptom_path(symptom), class: "text-decoration-none" %>
+            </h5>
+            <p class="card-text"><%= truncate(symptom.description, length: 100) if symptom.description %></p>
             
-            # 症状に対応する画像ファイル名
-            image_files = {
-              "腰痛" => "腰.png",
-              "肩こり" => "肩.png",
-              "首の痛み" => "腰.png",
-              "膝の痛み" => "膝.png",
-              "頭痛" => "頭痛.png",
-              "眼精疲労" => "腰.png"
-            }
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <small class="text-muted">
+                <span class="badge bg-success">🩺 症状</span>
+              </small>
+            </div>
             
-            symptom_order.each_with_index do |symptom_name, index|
-              symptom = Symptom.find_by(name: symptom_name)
-              next unless symptom
-              image_file = image_files[symptom_name]
-            %>
-              <div class="col-md-4 col-sm-6 mb-4">
-                <div class="card h-100 symptom-card">
-                  <!-- 画像エリア -->
-                  <div class="card-img-container">
-                    <% if image_file %>
-                      <%= image_tag image_file, class: "symptom-image", alt: symptom.name %>
-                    <% else %>
-                      <!-- 画像がない場合はアイコンを表示 -->
-                      <div class="symptom-icon-fallback d-flex align-items-center justify-content-center">
-                        <i class="fas fa-<%= icons[index] %> fa-4x text-<%= colors[index] %>"></i>
-                      </div>
-                    <% end %>
-                  </div>
-                  
-                  <div class="card-body text-center">
-                    <h5 class="card-title"><%= symptom.name %></h5>
-                    <p class="card-text text-muted"><%= descriptions[index] %></p>
-                    <%= link_to "セルフケアを見る", symptom_path(symptom), class: "btn btn-outline-#{colors[index]}" %>
-                  </div>
-                </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <%= link_to "詳細", symptom_path(symptom), class: "btn btn-sm btn-outline-primary" %>
               </div>
-            <% end %>
+              
+              <!-- 管理者のみ編集・削除ボタン表示 -->
+              <% if current_user&.admin? %>
+                <div>
+                  <%= link_to "編集", edit_symptom_path(symptom), class: "btn btn-sm btn-warning me-1" %>
+                  <%= link_to "削除", symptom_path(symptom), 
+                      method: :delete,
+                      class: "btn btn-sm btn-danger",
+                      confirm: "本当に削除しますか？" %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- 戻るボタン -->
-      <div class="text-center mt-4">
-        <%= link_to user_path(current_user), class: "btn btn-secondary" do %>
-          <i class="fas fa-arrow-left me-2"></i>プロフィールに戻る
-        <% end %>
-      </div>
+    <% end %>
+  </div>
+  
+  <% if @symptoms.empty? %>
+    <div class="text-center mt-5">
+      <h3 class="text-muted">症状がありません</h3>
+      <% if current_user&.admin? %>
+        <%= link_to "最初の症状を作成", new_symptom_path, class: "btn btn-primary mt-3" %>
+      <% end %>
     </div>
+  <% end %>
+  
+  <!-- ナビゲーション -->
+  <div class="text-center mt-4">
+    <%= link_to "🏃‍♀️ エクササイズ一覧", exercises_path, class: "btn btn-outline-info me-2" %>
+    <%= link_to "❤️ お気に入り", favorites_path, class: "btn btn-outline-warning" %>
   </div>
 </div>
 
-<style>
-.symptom-card {
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.symptom-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-.card-img-container {
-  height: 200px;
-  overflow: hidden;
-  position: relative;
-  background: #f8f9fa;
-}
-
-.symptom-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.symptom-icon-fallback {
-  height: 200px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-}
-
-.card-body {
-  padding: 1.5rem;
-}
-</style>
+<div class="mt-4 text-center">
+  <button class="btn btn-secondary" onclick="window.history.back(); return false;">戻る</button>
+</div>

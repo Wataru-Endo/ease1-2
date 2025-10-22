@@ -1,0 +1,36 @@
+<!-- filepath: /Users/endouwataru/care_app2/app/views/dashboard/show.html.erb -->
+<div class="container mt-4">
+  <h2>マイページ</h2>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h4>プロフィール</h4>
+      <p><strong>名前:</strong> <%= @user.name %></p>
+      <p><strong>メール:</strong> <%= @user.email %></p>
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image, class: "img-thumbnail", style: "max-width: 150px;" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h4>お気に入り一覧</h4>
+      <% if @favorites.any? %>
+        <ul class="list-group">
+          <% @favorites.each do |favorite| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <%= link_to favorite.exercise.title, exercise_path(favorite.exercise) %>
+              <%= link_to "解除", favorite_path(favorite), method: :delete, class: "btn btn-sm btn-danger" %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>お気に入りはありません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="mt-4 text-center">
+  <%= link_to "戻る", request.referer || root_path, class: "btn btn-secondary" %>
+</div>

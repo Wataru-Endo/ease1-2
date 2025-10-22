@@ -1,40 +1,46 @@
+# app/models/exercise.rb
 class Exercise < ApplicationRecord
+  # 関連
   belongs_to :symptom
   has_many :favorites, dependent: :destroy
-  has_many :favorited_by, through: :favorites, source: :user
+  has_many :favorited_users, through: :favorites, source: :user
   has_many :schedules, dependent: :destroy
   
-  # 動画ファイル添付
+  # 画像・動画ファイル
+  has_one_attached :image
   has_one_attached :video_file
+  
+  # カテゴリの定数を追加
+  CATEGORIES = ['運動', 'ストレッチ', 'セルフケア', 'リハビリ'].freeze
   
   # バリデーション
   validates :title, presence: true
   validates :description, presence: true
   validates :duration, presence: true, numericality: { greater_than: 0 }
   
-  # 動画があるかチェック
+  # スコープ
+  scope :published, -> { where(published: true) }
+  scope :recent, -> { order(created_at: :desc) }
+  scope :selfcare, -> { where(category: 'セルフケア') }
+  
+  # お気に入り数
+  def favorites_count
+    favorites.count
+  end
+  
+  # 動画があるかどうか
   def has_video?
-    video_file.attached? || youtube_url.present?
+    youtube_url.present? || video_file.attached?
   end
   
-  # YouTube URLからembedURLを生成
+  # セルフケアかどうかの判定
+  def selfcare?
+    category == 'セルフケア'
+  end
+
   def youtube_embed_url
-    return nil unless youtube_url.present?
-    
-    # 様々なYouTube URLフォーマットに対応
-    if youtube_url.include?('watch?v=')
-      video_id = youtube_url.split('watch?v=')[1].split('&')[0]
-    elsif youtube_url.include?('youtu.be/')
-      video_id = youtube_url.split('youtu.be/')[1].split('?')[0]
-    else
-      return youtube_url
-    end
-    
-    "https://www.youtube.com/embed/#{video_id}"
+    return nil if youtube_url.blank?
+    youtube_url.gsub("watch?v=", "embed/")
   end
-  
-  # お気に入り関連を追加
-  has_many :favorites, dependent: :destroy
-  has_many :favorited_users, through: :favorites, source: :user
 
 end

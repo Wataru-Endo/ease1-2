@@ -1,0 +1,51 @@
+<!-- filepath: /Users/endouwataru/care_app2/app/views/symptoms/edit.html.erb -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2>🩺 症状を編集</h2>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @symptom, local: true do |form| %>
+            <% if @symptom.errors.any? %>
+              <div class="alert alert-danger">
+                <ul class="mb-0">
+                  <% @symptom.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            
+            <div class="mb-3">
+              <%= form.label :name, "症状名", class: "form-label" %>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+            
+            <div class="mb-3">
+              <%= form.label :description, "症状の説明", class: "form-label" %>
+              <%= form.text_area :description, class: "form-control", rows: 4 %>
+            </div>
+            
+            <div class="mb-3">
+              <%= form.label :image, "症状の画像", class: "form-label" %>
+              <%= form.file_field :image, class: "form-control", accept: "image/*" %>
+              <% if @symptom.image.attached? %>
+                <div class="mt-2">
+                  <small class="text-muted">現在の画像:</small><br>
+                  <%= image_tag @symptom.image, style: "max-width: 200px; height: auto;" %>
+                </div>
+              <% end %>
+            </div>
+            
+            <div class="d-flex justify-content-between">
+              <%= link_to "戻る", symptom_path(@symptom), class: "btn btn-secondary" %>
+              <%= form.submit "症状を更新", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

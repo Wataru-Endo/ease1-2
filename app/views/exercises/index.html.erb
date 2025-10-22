@@ -1,2 +1,125 @@
-<h1>Exercises#index</h1>
-<p>Find me in app/views/exercises/index.html.erb</p>
+<!-- filepath: /Users/endouwataru/care_app2/app/views/exercises/index.html.erb -->
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>🏃‍♀️ エクササイズ一覧</h1>
+    
+    <div class="d-flex align-items-center">
+      <!-- 管理者のみエクササイズ作成ボタン表示 -->
+      <% if current_user&.admin? %>
+        <%= link_to "エクササイズ作成", new_exercise_path, class: "btn btn-primary me-2" %>
+      <% end %>
+      
+      <!-- ユーザー情報表示 -->
+      <div class="me-3">
+        <% if current_user %>
+          <span class="badge <%= current_user.admin? ? 'bg-danger' : 'bg-primary' %>">
+            <%= current_user.role_display %>
+          </span>
+          <%= current_user.name %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 権限に応じたメッセージ -->
+  <% if current_user&.admin? %>
+    <div class="alert alert-danger mb-4">
+      <strong>管理者モードです。</strong> エクササイズの編集が可能です。
+    </div>
+  <% else %>
+    <div class="alert alert-primary mb-4">
+      <strong>ユーザーモードです。</strong> エクササイズの閲覧が可能です。
+    </div>
+  <% end %>
+  
+  <!-- エクササイズ一覧 -->
+  <div class="row">
+    <% @exercises.each do |exercise| %>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+          <% if exercise.image.attached? %>
+            <%= image_tag exercise.image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+          <% elsif exercise.has_video? %>
+            <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
+              <i class="fas fa-play-circle fa-5x text-primary"></i>
+            </div>
+          <% else %>
+            <div class="card-img-top d-flex align-items-center justify-content-center bg-light" style="height: 200px;">
+              <i class="fas fa-dumbbell fa-3x text-muted"></i>
+            </div>
+          <% end %>
+          
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to exercise.title, exercise_path(exercise), class: "text-decoration-none" %>
+            </h5>
+            <p class="card-text"><%= truncate(exercise.description, length: 100) %></p>
+            
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <small class="text-muted">
+                <span class="badge bg-primary">エクササイズ</span>
+              </small>
+              
+              <small class="text-muted">
+                <i class="fas fa-clock me-1"></i><%= exercise.duration %>分
+              </small>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <%= link_to "詳細", exercise_path(exercise), class: "btn btn-sm btn-outline-primary" %>
+              </div>
+              
+              <div class="d-flex align-items-center">
+                <!-- お気に入りボタン -->
+                <% if current_user %>
+                  <% if current_user.favorited?(exercise) %>
+                    <%= link_to unfavorite_exercise_path(exercise), 
+                        class: "btn btn-sm btn-danger me-2" do %>
+                      <i class="fas fa-heart"></i> <%= exercise.favorites_count || 0 %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to favorite_exercise_path(exercise), 
+                        class: "btn btn-sm btn-outline-danger me-2" do %>
+                      <i class="far fa-heart"></i> <%= exercise.favorites_count || 0 %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                
+                <!-- 管理者のみ編集・削除ボタン表示 -->
+                <% if current_user&.admin? %>
+                  <div>
+                    <%= link_to "編集", edit_exercise_path(exercise), class: "btn btn-sm btn-warning me-1" %>
+                    <%= link_to "削除", exercise_path(exercise), 
+                        method: :delete,
+                        class: "btn btn-sm btn-danger",
+                        confirm: "本当に削除しますか？" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <% if @exercises.empty? %>
+    <div class="text-center mt-5">
+      <h3 class="text-muted">エクササイズがありません</h3>
+      <% if current_user&.admin? %>
+        <%= link_to "最初のエクササイズを作成", new_exercise_path, class: "btn btn-primary mt-3" %>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <!-- ナビゲーション -->
+  <div class="text-center mt-4">
+    <%= link_to "症状一覧", symptoms_path, class: "btn btn-outline-info me-2" %>
+    <%= link_to "❤️ お気に入り", favorites_path, class: "btn btn-outline-warning" %>
+  </div>
+</div>
+
+<div class="mt-4 text-center">
+  <button class="btn btn-secondary" onclick="window.history.back(); return false;">戻る</button>
+</div>
