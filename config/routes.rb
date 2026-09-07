@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   resources :users, except: [:index]
   
   # ログイン・ログアウト
-  get '/login', to: 'sessions#new'
+  get '/login', to: 'sessions#new', as: :login
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: :logout
+  post '/dev_login', to: 'sessions#dev_login', as: :dev_login
 
   # 症状
   resources :symptoms

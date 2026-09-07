@@ -6,7 +6,7 @@
     <div class="d-flex align-items-center">
       <!-- 管理者のみ症状作成ボタン表示 -->
       <% if current_user&.admin? %>
-        <%= link_to "💊 症状作成", new_symptom_path, class: "btn btn-primary me-2" %>
+        <%= link_to "症状作成", new_symptom_path, class: "btn btn-primary me-2" %>
       <% end %>
       
       <div class="me-3">
@@ -24,11 +24,11 @@
   <!-- 権限に応じたメッセージ -->
   <% if current_user&.admin? %>
     <div class="alert alert-danger mb-4">
-      <strong>👑 管理者モードです。</strong> 症状の編集が可能です。
+      <strong>管理者モードです。</strong> 症状の編集が可能です。
     </div>
   <% else %>
     <div class="alert alert-primary mb-4">
-      <strong>👤 ユーザーモードです。</strong> 症状の閲覧が可能です。
+      <strong>ユーザーモードです。</strong> 症状の閲覧が可能です。
     </div>
   <% end %>
   
@@ -67,9 +67,8 @@
                 <div>
                   <%= link_to "編集", edit_symptom_path(symptom), class: "btn btn-sm btn-warning me-1" %>
                   <%= link_to "削除", symptom_path(symptom), 
-                      method: :delete,
-                      class: "btn btn-sm btn-danger",
-                      confirm: "本当に削除しますか？" %>
+                      data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                      class: "btn btn-sm btn-danger" %>
                 </div>
               <% end %>
             </div>
@@ -90,11 +89,15 @@
   
   <!-- ナビゲーション -->
   <div class="text-center mt-4">
-    <%= link_to "🏃‍♀️ エクササイズ一覧", exercises_path, class: "btn btn-outline-info me-2" %>
-    <%= link_to "❤️ お気に入り", favorites_path, class: "btn btn-outline-warning" %>
+    <%= link_to "エクササイズ一覧", exercises_path, class: "btn btn-outline-info me-2" %>
+    <%= link_to "お気に入り", favorites_path, class: "btn btn-outline-warning" %>
   </div>
 </div>
 
 <div class="mt-4 text-center">
-  <button class="btn btn-secondary" onclick="window.history.back(); return false;">戻る</button>
+  <%= link_to "マイページに戻る", user_path(current_user), class: "btn btn-secondary" %>
 </div>
+
+<% content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>

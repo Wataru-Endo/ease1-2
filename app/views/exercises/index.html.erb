@@ -91,9 +91,8 @@
                   <div>
                     <%= link_to "編集", edit_exercise_path(exercise), class: "btn btn-sm btn-warning me-1" %>
                     <%= link_to "削除", exercise_path(exercise), 
-                        method: :delete,
-                        class: "btn btn-sm btn-danger",
-                        confirm: "本当に削除しますか？" %>
+                        data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                        class: "btn btn-sm btn-danger" %>
                   </div>
                 <% end %>
               </div>
@@ -116,10 +115,10 @@
   <!-- ナビゲーション -->
   <div class="text-center mt-4">
     <%= link_to "症状一覧", symptoms_path, class: "btn btn-outline-info me-2" %>
-    <%= link_to "❤️ お気に入り", favorites_path, class: "btn btn-outline-warning" %>
+    <%= link_to "お気に入り", favorites_path, class: "btn btn-outline-warning" %>
   </div>
 </div>
 
-<div class="mt-4 text-center">
-  <button class="btn btn-secondary" onclick="window.history.back(); return false;">戻る</button>
-</div>
+   <div class="mt-4 text-center">
+    <%= link_to "マイページに戻る", user_path(current_user), class: "btn btn-secondary" %>
+   </div>

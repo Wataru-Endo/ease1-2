@@ -115,7 +115,7 @@
 </div>
 
 <div class="mt-4 text-center">
-  <button class="btn btn-secondary" onclick="window.history.back(); return false;">戻る</button>
+  <%= link_to "マイページに戻る", user_path(current_user), class: "btn btn-secondary" %>
 </div>
 
 <style>
