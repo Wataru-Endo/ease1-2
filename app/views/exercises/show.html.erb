@@ -78,6 +78,13 @@
             <%= link_to "エクササイズ一覧に戻る", exercises_path, class: "btn btn-outline-primary w-100 mb-2" %>
           <% end %>
           
+          <!-- スケジュール追加ボタン -->
+          <% if current_user %>
+            <%= link_to new_schedule_path(exercise_id: @exercise.id), class: "btn btn-outline-primary w-100 mb-2" do %>
+              <i class="fas fa-calendar-plus me-2"></i>スケジュールに追加
+            <% end %>
+          <% end %>
+
           <!-- お気に入りボタン（全ユーザー対象） -->
           <% if current_user %>
             <% favorite = current_user.favorites.find_by(exercise: @exercise) %>

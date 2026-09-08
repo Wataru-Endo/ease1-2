@@ -1,0 +1,41 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>スケジュール一覧</h1>
+    <%= link_to "スケジュールを追加", new_schedule_path, class: "btn btn-primary" %>
+  </div>
+
+  <% if @schedules.any? %>
+    <ul class="list-group">
+      <% @schedules.each do |schedule| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong><%= schedule.exercise.title %></strong>
+            <div class="text-muted small">
+              <%= l(schedule.scheduled_at, format: :long) rescue schedule.scheduled_at %>
+              <% if schedule.completed %>
+                <span class="badge bg-success ms-2">完了</span>
+              <% else %>
+                <span class="badge bg-warning text-dark ms-2">未完了</span>
+              <% end %>
+            </div>
+          </div>
+          <div>
+            <%= link_to "編集", edit_schedule_path(schedule), class: "btn btn-sm btn-warning me-1" %>
+            <%= link_to "削除", schedule_path(schedule),
+                data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                class: "btn btn-sm btn-danger" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="text-center mt-5">
+      <h3 class="text-muted">スケジュールがありません</h3>
+      <%= link_to "最初のスケジュールを追加", new_schedule_path, class: "btn btn-primary mt-3" %>
+    </div>
+  <% end %>
+
+  <div class="mt-4 text-center">
+    <%= link_to "マイページに戻る", user_path(current_user), class: "btn btn-secondary" %>
+  </div>
+</div>

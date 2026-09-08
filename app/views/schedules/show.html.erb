@@ -1,0 +1,24 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title"><%= @schedule.exercise.title %></h1>
+      <p>
+        <strong>日時:</strong> <%= l(@schedule.scheduled_at, format: :long) rescue @schedule.scheduled_at %>
+      </p>
+      <p>
+        <strong>状態:</strong>
+        <% if @schedule.completed %>
+          <span class="badge bg-success">完了</span>
+        <% else %>
+          <span class="badge bg-warning text-dark">未完了</span>
+        <% end %>
+      </p>
+
+      <%= link_to "編集", edit_schedule_path(@schedule), class: "btn btn-warning me-1" %>
+      <%= link_to "削除", schedule_path(@schedule),
+          data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+          class: "btn btn-danger" %>
+      <%= link_to "一覧に戻る", schedules_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>
