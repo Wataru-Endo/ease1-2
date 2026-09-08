@@ -14,13 +14,13 @@ Rails.application.routes.draw do
   root "home#index"
 
   # ユーザー認証
-  resources :users, except: [:index]
-  
+  resources :users, except: [ :index ]
+
   # ログイン・ログアウト
-  get '/login', to: 'sessions#new', as: :login
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy', as: :logout
-  post '/dev_login', to: 'sessions#dev_login', as: :dev_login
+  get "/login", to: "sessions#new", as: :login
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy", as: :logout
+  post "/dev_login", to: "sessions#dev_login", as: :dev_login
 
   # 症状
   resources :symptoms
@@ -28,20 +28,20 @@ Rails.application.routes.draw do
   # エクササイズ
   resources :exercises do
     member do
-      post :favorite, to: 'favorites#create'
-      delete :unfavorite, to: 'favorites#destroy'
+      post :favorite, to: "favorites#create"
+      delete :unfavorite, to: "favorites#destroy"
     end
   end
-  
+
   # お気に入り一覧
-  resources :favorites, only: [:index, :show, :create, :destroy]
+  resources :favorites, only: [ :index, :show, :create, :destroy ]
 
   # スケジュール
   resources :schedules
 
   # 管理者ページ
   namespace :admin do
-    resources :users, only: [:index, :show, :edit, :update, :destroy]
+    resources :users, only: [ :index, :show, :edit, :update, :destroy ]
     resources :exercises
     resources :symptoms
   end
