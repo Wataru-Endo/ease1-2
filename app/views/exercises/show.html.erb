@@ -50,14 +50,14 @@
           <!-- 手順表示 -->
           <% if @exercise.instructions.present? %>
             <div class="mb-4">
-              <h5>📋 手順</h5>
+              <h5>手順</h5>
               <%= simple_format(@exercise.instructions) %>
             </div>
           <% end %>
           
           <% if @exercise.steps.present? %>
             <div class="mb-4">
-              <h5>👣 ステップ</h5>
+              <h5>ステップ</h5>
               <%= simple_format(@exercise.steps) %>
             </div>
           <% end %>
